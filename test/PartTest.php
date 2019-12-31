@@ -1,29 +1,27 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mime
+ * @see       https://github.com/laminas/laminas-mime for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-mime/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-mime/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Mime;
+namespace LaminasTest\Mime;
 
-use Zend\Mime;
+use Laminas\Mime;
 
 /**
- * @category   Zend
- * @package    Zend_Mime
+ * @category   Laminas
+ * @package    Laminas_Mime
  * @subpackage UnitTests
- * @group      Zend_Mime
+ * @group      Laminas_Mime
  */
 class PartTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * MIME part test object
      *
-     * @var Zend_Mime_Part
+     * @var Laminas_Mime_Part
      */
     protected $part = null;
     protected $testText;
@@ -101,7 +99,7 @@ class PartTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group ZF-1491
+     * @group Laminas-1491
      */
     public function testGetRawContentFromPart()
     {
