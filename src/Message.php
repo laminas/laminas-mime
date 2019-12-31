@@ -1,13 +1,12 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-mime for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-mime/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-mime/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Mime;
+namespace Laminas\Mime;
 
 class Message
 {
@@ -15,7 +14,7 @@ class Message
     protected $mime = null;
 
     /**
-     * Returns the list of all Zend\Mime\Part in the message
+     * Returns the list of all Laminas\Mime\Part in the message
      *
      * @return Part[]
      */
@@ -25,7 +24,7 @@ class Message
     }
 
     /**
-     * Sets the given array of Zend\Mime\Part as the array for the message
+     * Sets the given array of Laminas\Mime\Part as the array for the message
      *
      * @param array $parts
      * @return self
@@ -37,9 +36,9 @@ class Message
     }
 
     /**
-     * Append a new Zend\Mime\Part to the current message
+     * Append a new Laminas\Mime\Part to the current message
      *
-     * @param \Zend\Mime\Part $part
+     * @param \Laminas\Mime\Part $part
      * @throws Exception\InvalidArgumentException
      * @return self
      */
@@ -70,12 +69,12 @@ class Message
     }
 
     /**
-     * Set Zend\Mime\Mime object for the message
+     * Set Laminas\Mime\Mime object for the message
      *
      * This can be used to set the boundary specifically or to use a subclass of
-     * Zend\Mime for generating the boundary.
+     * Laminas\Mime for generating the boundary.
      *
-     * @param \Zend\Mime\Mime $mime
+     * @param \Laminas\Mime\Mime $mime
      * @return self
      */
     public function setMime(Mime $mime)
@@ -85,12 +84,12 @@ class Message
     }
 
     /**
-     * Returns the Zend\Mime\Mime object in use by the message
+     * Returns the Laminas\Mime\Mime object in use by the message
      *
      * If the object was not present, it is created and returned. Can be used to
      * determine the boundary used in this message.
      *
-     * @return \Zend\Mime\Mime
+     * @return \Laminas\Mime\Mime
      */
     public function getMime()
     {
@@ -108,12 +107,12 @@ class Message
      * only one part is present, the content of this part is returned. If no
      * part had been added, an empty string is returned.
      *
-     * Parts are separated by the mime boundary as defined in Zend\Mime\Mime. If
-     * {@link setMime()} has been called before this method, the Zend\Mime\Mime
-     * object set by this call will be used. Otherwise, a new Zend\Mime\Mime object
+     * Parts are separated by the mime boundary as defined in Laminas\Mime\Mime. If
+     * {@link setMime()} has been called before this method, the Laminas\Mime\Mime
+     * object set by this call will be used. Otherwise, a new Laminas\Mime\Mime object
      * is generated and used.
      *
-     * @param string $EOL EOL string; defaults to {@link Zend\Mime\Mime::LINEEND}
+     * @param string $EOL EOL string; defaults to {@link Laminas\Mime\Mime::LINEEND}
      * @return string
      */
     public function generateMessage($EOL = Mime::LINEEND)
@@ -224,13 +223,13 @@ class Message
     }
 
     /**
-     * Decodes a MIME encoded string and returns a Zend\Mime\Message object with
+     * Decodes a MIME encoded string and returns a Laminas\Mime\Message object with
      * all the MIME parts set according to the given string
      *
      * @param string $message
      * @param string $boundary Multipart boundary; if omitted, $message will be
      *     treated as a single part.
-     * @param string $EOL EOL string; defaults to {@link Zend\Mime\Mime::LINEEND}
+     * @param string $EOL EOL string; defaults to {@link Laminas\Mime\Mime::LINEEND}
      * @throws Exception\RuntimeException
      * @return Message
      */
@@ -251,7 +250,7 @@ class Message
             // now we build a new MimePart for the current Message Part:
             $properties = [];
             foreach ($part['header'] as $header) {
-                /** @var \Zend\Mail\Header\HeaderInterface $header */
+                /** @var \Laminas\Mail\Header\HeaderInterface $header */
                 /**
                  * @todo check for characterset and filename
                  */
