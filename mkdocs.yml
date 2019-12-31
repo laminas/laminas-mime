@@ -1,11 +1,12 @@
 docs_dir: docs/book
 site_dir: docs/html
 nav:
-    - Home: index.md
-    - Introduction: intro.md
-    - Reference:
-        - Messages: message.md
-        - Parts: part.md
+    - { Home: index.md }
+    - { Introduction: intro.md }
+    - { Reference: [{ Messages: message.md }, { Parts: part.md }] }
 site_name: laminas-mime
-site_description: "Create and parse MIME messages and parts"
+site_description: 'Create and parse MIME messages and parts'
 repo_url: 'https://github.com/laminas/laminas-mime'
+extra:
+    project: Components
+    project_url: 'https://docs.laminas.dev'
