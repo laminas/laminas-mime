@@ -1,29 +1,22 @@
 {
-    "name": "zendframework/zend-mime",
+    "name": "laminas/laminas-mime",
     "description": " ",
     "license": "BSD-3-Clause",
     "keywords": [
-        "zf2",
+        "laminas",
         "mime"
     ],
-    "homepage": "https://github.com/zendframework/zend-mime",
-    "autoload": {
-        "psr-4": {
-            "Zend\\Mime\\": "src/"
-        }
+    "homepage": "https://laminas.dev",
+    "support": {
+        "docs": "https://docs.laminas.dev/laminas-mime/",
+        "issues": "https://github.com/laminas/laminas-mime/issues",
+        "source": "https://github.com/laminas/laminas-mime",
+        "rss": "https://github.com/laminas/laminas-mime/releases.atom",
+        "chat": "https://laminas.dev/chat",
+        "forum": "https://discourse.laminas.dev"
     },
-    "require": {
-        "php": ">=5.3.3",
-        "zendframework/zend-stdlib": "self.version"
-    },
-    "require-dev": {
-        "zendframework/zend-mail": "self.version",
-        "fabpot/php-cs-fixer": "1.7.*",
-        "satooshi/php-coveralls": "dev-master",
-        "phpunit/PHPUnit": "~4.0"
-    },
-    "suggest": {
-        "zendframework/zend-mail": "Zend\\Mail component"
+    "config": {
+        "sort-packages": true
     },
     "extra": {
         "branch-alias": {
@@ -31,9 +24,31 @@
             "dev-develop": "2.2-dev"
         }
     },
+    "require": {
+        "php": ">=5.3.3",
+        "laminas/laminas-stdlib": "self.version",
+        "laminas/laminas-zendframework-bridge": "^1.0"
+    },
+    "require-dev": {
+        "fabpot/php-cs-fixer": "1.7.*",
+        "laminas/laminas-mail": "self.version",
+        "phpunit/phpunit": "~4.0",
+        "satooshi/php-coveralls": "dev-master"
+    },
+    "suggest": {
+        "laminas/laminas-mail": "Laminas\\Mail component"
+    },
+    "autoload": {
+        "psr-4": {
+            "Laminas\\Mime\\": "src/"
+        }
+    },
     "autoload-dev": {
         "psr-4": {
-            "ZendTest\\Mime\\": "test/"
+            "LaminasTest\\Mime\\": "test/"
         }
+    },
+    "replace": {
+        "zendframework/zend-mime": "self.version"
     }
 }
