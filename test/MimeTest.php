@@ -1,18 +1,17 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-mime for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-mime/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-mime/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Mime;
+namespace LaminasTest\Mime;
 
-use Zend\Mime;
+use Laminas\Mime;
 
 /**
- * @group      Zend_Mime
+ * @group      Laminas_Mime
  */
 class MimeTest extends \PHPUnit_Framework_TestCase
 {
@@ -92,7 +91,7 @@ class MimeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($content, base64_decode($encoded));
     }
 
-    public function testZf1058WhitespaceAtEndOfBodyCausesInfiniteLoop()
+    public function testLaminas1058WhitespaceAtEndOfBodyCausesInfiniteLoop()
     {
         $text   = "my body\r\n\r\n...after two newlines\r\n ";
         $result = quoted_printable_decode(Mime\Mime::encodeQuotedPrintable($text));
@@ -100,7 +99,7 @@ class MimeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group        ZF-1688
+     * @group        Laminas-1688
      * @dataProvider dataTestEncodeMailHeaderQuotedPrintable
      */
     public function testEncodeMailHeaderQuotedPrintable($str, $charset, $result)
@@ -123,7 +122,7 @@ class MimeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group        ZF-1688
+     * @group        Laminas-1688
      * @dataProvider dataTestEncodeMailHeaderBase64
      */
     public function testEncodeMailHeaderBase64($str, $charset, $result)
@@ -220,7 +219,7 @@ n in das Wasser, Schw=C3=A4nzchen in die H=C3=B6h!'],
     }
 
     /**
-     * @group ZF-1688
+     * @group Laminas-1688
      */
     public function testLineLengthInQuotedPrintableHeaderEncoding()
     {

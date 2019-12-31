@@ -1,18 +1,17 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-mime for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-mime/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-mime/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Mime;
+namespace LaminasTest\Mime;
 
-use Zend\Mime;
+use Laminas\Mime;
 
 /**
- * @group      Zend_Mime
+ * @group      Laminas_Mime
  */
 class PartTest extends \PHPUnit_Framework_TestCase
 {
@@ -97,7 +96,7 @@ class PartTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group ZF-1491
+     * @group Laminas-1491
      */
     public function testGetRawContentFromPart()
     {
@@ -164,13 +163,13 @@ class PartTest extends \PHPUnit_Framework_TestCase
 
     public function testConstructGetInvalidArgumentException()
     {
-        $this->setExpectedException('Zend\Mime\Exception\InvalidArgumentException');
+        $this->setExpectedException('Laminas\Mime\Exception\InvalidArgumentException');
         $part = new Mime\Part(1);
     }
 
     public function testSetContentGetInvalidArgumentException()
     {
-        $this->setExpectedException('Zend\Mime\Exception\InvalidArgumentException');
+        $this->setExpectedException('Laminas\Mime\Exception\InvalidArgumentException');
         $part = new Mime\Part();
         $part->setContent(1);
     }
