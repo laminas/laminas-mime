@@ -1,17 +1,18 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-mime for the canonical source repository
- * @copyright Copyright (c) 2005-2019 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-mime/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-mime for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-mime/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-mime/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Mime;
+namespace LaminasTest\Mime;
 
+use Laminas\Mime;
 use PHPUnit\Framework\TestCase;
-use Zend\Mime;
 
 /**
- * @group      Zend_Mime
+ * @group      Laminas_Mime
  */
 class PartTest extends TestCase
 {
@@ -96,7 +97,7 @@ class PartTest extends TestCase
     }
 
     /**
-     * @group ZF-1491
+     * @group Laminas-1491
      */
     public function testGetRawContentFromPart()
     {
