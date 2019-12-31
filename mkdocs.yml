@@ -6,6 +6,6 @@ nav:
     - Reference:
         - Messages: message.md
         - Parts: part.md
-site_name: zend-mime
+site_name: laminas-mime
 site_description: "Create and parse MIME messages and parts"
-repo_url: 'https://github.com/zendframework/zend-mime'
+repo_url: 'https://github.com/laminas/laminas-mime'

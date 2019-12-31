@@ -1,18 +1,19 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-mime for the canonical source repository
- * @copyright Copyright (c) 2005-2019 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-mime/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-mime for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-mime/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-mime/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Mime;
+namespace LaminasTest\Mime;
 
+use Laminas\Mime;
+use Laminas\Mime\Message;
 use PHPUnit\Framework\TestCase;
-use Zend\Mime;
-use Zend\Mime\Message;
 
 /**
- * @group      Zend_Mime
+ * @group      Laminas_Mime
  */
 class MessageTest extends TestCase
 {
@@ -42,13 +43,13 @@ class MessageTest extends TestCase
     {
         $msg = new Mime\Message();  // No Parts
         $m = $msg->getMime();
-        $this->assertInstanceOf('Zend\\Mime\\Mime', $m);
+        $this->assertInstanceOf('Laminas\\Mime\\Mime', $m);
 
         $msg = new Mime\Message();  // No Parts
         $mime = new Mime\Mime('1234');
         $msg->setMime($mime);
         $m2 = $msg->getMime();
-        $this->assertInstanceOf('Zend\\Mime\\Mime', $m2);
+        $this->assertInstanceOf('Laminas\\Mime\\Mime', $m2);
         $this->assertEquals('1234', $m2->boundary());
     }
 
@@ -76,7 +77,7 @@ class MessageTest extends TestCase
     }
 
     /**
-     * check if decoding a string into a \Zend\Mime\Message object works
+     * check if decoding a string into a \Laminas\Mime\Message object works
      *
      */
     public function testDecodeMimeMessage()
@@ -113,7 +114,7 @@ EOD;
     }
 
     /**
-     * check if decoding a string into a \Zend\Mime\Message object works
+     * check if decoding a string into a \Laminas\Mime\Message object works
      *
      */
     public function testDecodeMimeMessageNoHeader()
@@ -181,7 +182,7 @@ EOD;
     }
 
     /**
-     * @group ZF2-5962
+     * @group Laminas-5962
      */
     public function testPassEmptyArrayIntoSetPartsShouldReturnEmptyString()
     {
