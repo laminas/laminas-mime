@@ -1,9 +1,9 @@
-# zend-mime
+# laminas-mime
 
-`Zend\Mime` is a support class for handling multipart MIME messages. It is used
-by `Zend\Mail` and `Zend\Mime\Message` and may be used by applications requiring
+`Laminas\Mime` is a support class for handling multipart MIME messages. It is used
+by `Laminas\Mail` and `Laminas\Mime\Message` and may be used by applications requiring
 MIME support.
 
 
-- File issues at https://github.com/zendframework/zend-mime/issues
-- Documentation is at http://framework.zend.com/manual/current/en/index.html#zend-mime
+- File issues at https://github.com/laminas/laminas-mime/issues
+- Documentation is at https://docs.laminas.dev/laminas-mime
