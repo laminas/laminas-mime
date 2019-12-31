@@ -1,21 +1,19 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Mime
+ * @see       https://github.com/laminas/laminas-mime for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-mime/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-mime/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Mime;
+namespace Laminas\Mime;
 
-use Zend\Mail\Headers;
-use Zend\Stdlib\ErrorHandler;
+use Laminas\Mail\Headers;
+use Laminas\Stdlib\ErrorHandler;
 
 /**
- * @category   Zend
- * @package    Zend_Mime
+ * @category   Laminas
+ * @package    Laminas_Mime
  */
 class Decode
 {
@@ -70,7 +68,7 @@ class Decode
      *
      * @param  string $message  raw message content
      * @param  string $boundary boundary as found in content-type
-     * @param  string $EOL EOL string; defaults to {@link Zend_Mime::LINEEND}
+     * @param  string $EOL EOL string; defaults to {@link Laminas_Mime::LINEEND}
      * @return array|null parts as array('header' => array(name => value), 'body' => content), null if no parts found
      * @throws Exception\RuntimeException
      */
@@ -100,7 +98,7 @@ class Decode
      * @param  string|Headers  $message raw message with header and optional content
      * @param  Headers         $headers output param, headers container
      * @param  string          $body    output param, content of message
-     * @param  string          $EOL EOL string; defaults to {@link Zend_Mime::LINEEND}
+     * @param  string          $EOL EOL string; defaults to {@link Laminas_Mime::LINEEND}
      * @param  boolean         $strict  enable strict mode for parsing message
      * @return null
      */
@@ -118,7 +116,7 @@ class Decode
             return;
         }
 
-        // see @ZF2-372, pops the first line off a message if it doesn't contain a header
+        // see @Laminas-372, pops the first line off a message if it doesn't contain a header
         if (!$strict) {
             $parts = explode(': ', $firstline, 2);
             if (count($parts) != 2) {
