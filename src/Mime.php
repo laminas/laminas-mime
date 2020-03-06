@@ -137,7 +137,7 @@ class Mime
             }
 
             if (ord($chunk[0]) == 0x2E) { // 0x2E is a dot
-                $chunk  = '=2E' . substr($chunk, 1);
+                $chunk = '=2E' . substr($chunk, 1);
             }
 
             // copied from swiftmailer https://git.io/vAXU1
