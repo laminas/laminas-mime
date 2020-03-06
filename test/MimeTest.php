@@ -298,4 +298,12 @@ n in das Wasser, Schw=C3=A4nzchen in die H=C3=B6h!'],
     {
         $this->assertEquals($expected, Mime\Mime::mimeDetectCharset($string));
     }
+
+    public function testEncodeQuotedPrintableShouldBeFastEnoughForLongInputStrings()
+    {
+        $str = str_repeat("this could be anything, ", 200000);
+        $time = microtime(true);
+        Mime\Mime::encodeQuotedPrintable($str);
+        $this->assertLessThan(5, microtime(true) - $time);
+    }
 }
