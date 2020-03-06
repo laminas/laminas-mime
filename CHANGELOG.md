@@ -22,7 +22,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#10](https://github.com/laminas/laminas-mime/pull/10) improves implementation of `Mime::encodeQuotedPrintable()` for big strings by avoiding copying of the whole string in the loop.
 
 ## 2.7.2 - 2019-10-16
 
