@@ -28,7 +28,7 @@ class MimeTest extends TestCase
     /**
      * Setup environment
      */
-    public function setUp()
+    protected function setUp()
     {
         $this->_originaltimezone = date_default_timezone_get();
     }
@@ -36,7 +36,7 @@ class MimeTest extends TestCase
     /**
      * Tear down environment
      */
-    public function tearDown()
+    protected function tearDown()
     {
         date_default_timezone_set($this->_originaltimezone);
     }
