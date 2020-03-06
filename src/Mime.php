@@ -118,38 +118,41 @@ class Mime
         $str = self::_encodeQuotedPrintable($str);
 
         // Split encoded text into separate lines
-        while ($str) {
-            $ptr = strlen($str);
-            if ($ptr > $lineLength) {
-                $ptr = $lineLength;
+        $initialPtr = 0;
+        $strLength = strlen($str);
+        while ($initialPtr < $strLength) {
+            $continueAt = $strLength - $initialPtr;
+
+            if ($continueAt > $lineLength) {
+                $continueAt = $lineLength;
             }
+
+            $chunk = substr($str, $initialPtr, $continueAt);
 
             // Ensure we are not splitting across an encoded character
-            $pos = strrpos(substr($str, 0, $ptr), '=');
-            if ($pos !== false && $pos >= $ptr - 2) {
-                $ptr = $pos;
+            $endingMarkerPos = strrpos($chunk, '=');
+            if ($endingMarkerPos !== false && $endingMarkerPos >= strlen($chunk) - 2) {
+                $chunk = substr($chunk, 0, $endingMarkerPos);
+                $continueAt = $endingMarkerPos;
             }
 
-            if (ord($str[0]) == 0x2E) { // 0x2E is a dot
-                $str  = '=2E' . substr($str, 1);
-                $ptr += 2;
+            if (ord($chunk[0]) == 0x2E) { // 0x2E is a dot
+                $chunk = '=2E' . substr($chunk, 1);
             }
 
             // copied from swiftmailer https://git.io/vAXU1
-            switch (ord(substr($str, $ptr - 1))) {
+            switch (ord(substr($chunk, strlen($chunk) - 1))) {
                 case 0x09: // Horizontal Tab
-                    $str  = substr_replace($str, '=09', $ptr - 1, 1);
-                    $ptr += 2;
+                    $chunk = substr_replace($chunk, '=09', strlen($chunk) - 1, 1);
                     break;
                 case 0x20: // Space
-                    $str  = substr_replace($str, '=20', $ptr - 1, 1);
-                    $ptr += 2;
+                    $chunk = substr_replace($chunk, '=20', strlen($chunk) - 1, 1);
                     break;
             }
 
             // Add string and continue
-            $out .= substr($str, 0, $ptr) . '=' . $lineEnd;
-            $str = substr($str, $ptr);
+            $out .= $chunk . '=' . $lineEnd;
+            $initialPtr += $continueAt;
         }
 
         $out = rtrim($out, $lineEnd);
