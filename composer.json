@@ -58,6 +58,6 @@
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     },
     "replace": {
-        "zendframework/zend-mime": "self.version"
+        "zendframework/zend-mime": "^2.7.2"
     }
 }
