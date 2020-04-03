@@ -325,10 +325,12 @@ the behaviour of the <code>Mime</code> instance used by <code>Message</code>, yo
 <h2 id="parsing-a-string-to-create-a-laminasmimemessage-object">Parsing a string to create a Laminas\Mime\Message object</h2>
 <p><code>Laminas\Mime\Message</code> defines a static factory for parsing MIME-compliant message
 strings and returning a <code>Laminas\Mime\Message</code> instance:</p>
-<pre class=codehilite><code class=language-php>$message = Laminas\Mime\Message::createFromMessage($string, $boundary);</code></pre>
+<pre class="highlight"><code class="language-php">$message = Laminas\Mime\Message::createFromMessage($string, $boundary);</code></pre>
+
 <p>As of version 2.6.1, You may also parse a single-part message by omitting the
 <code>$boundary</code> argument:</p>
-<pre class=codehilite><code class=language-php>$message = Laminas\Mime\Message::createFromMessage($string);</code></pre>
+<pre class="highlight"><code class="language-php">$message = Laminas\Mime\Message::createFromMessage($string);</code></pre>
+
 <h2 id="available-methods">Available methods</h2>
 <p><code>Laminas\Mime\Message</code> contains the following methods:</p>
 <ul>

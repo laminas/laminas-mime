@@ -299,7 +299,7 @@ instances to assemble a complete multipart message.</p>
 content. The type is assumed to be OCTET-STREAM, with an 8-bit encoding. After
 instantiating a <code>Laminas\Mime\Part</code>, meta information can be set directly on its
 attributes:</p>
-<pre class=codehilite><code class=language-php>public $type = Laminas\Mime\Mime::TYPE_OCTETSTREAM;
+<pre class="highlight"><code class="language-php">public $type = Laminas\Mime\Mime::TYPE_OCTETSTREAM;
 public $encoding = Laminas\Mime\Mime::ENCODING_8BIT;
 public $id;
 public $disposition;
@@ -309,6 +309,7 @@ public $charset;
 public $boundary;
 public $location;
 public $language;</code></pre>
+
 <h2 id="methods-for-rendering-the-message-part-to-a-string">Methods for rendering the message part to a string</h2>
 <p><code>getContent()</code> returns the encoded content of the <code>Laminas\Mime\Part</code> as a string
 using the encoding specified in the attribute <code>$encoding</code>. Valid values are
