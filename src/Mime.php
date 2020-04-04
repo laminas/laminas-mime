@@ -17,6 +17,8 @@ class Mime
     const TYPE_OCTETSTREAM         = 'application/octet-stream';
     const TYPE_TEXT                = 'text/plain';
     const TYPE_HTML                = 'text/html';
+    const TYPE_ENRICHED            = 'text/enriched';
+    const TYPE_XML                 = 'text/xml';
     const ENCODING_7BIT            = '7bit';
     const ENCODING_8BIT            = '8bit';
     const ENCODING_QUOTEDPRINTABLE = 'quoted-printable';
@@ -28,6 +30,10 @@ class Mime
     const MULTIPART_ALTERNATIVE    = 'multipart/alternative';
     const MULTIPART_MIXED          = 'multipart/mixed';
     const MULTIPART_RELATED        = 'multipart/related';
+    const MULTIPART_RELATIVE       = 'multipart/relative';
+    const MULTIPART_REPORT         = 'multipart/report';
+    const MESSAGE_RFC822           = 'message/rfc822';
+    const MESSAGE_DELIVERY_STATUS  = 'message/delivery-status';
     const CHARSET_REGEX            = '#=\?(?P<charset>[\x21\x23-\x26\x2a\x2b\x2d\x5e\5f\60\x7b-\x7ea-zA-Z0-9]+)\?(?P<encoding>[\x21\x23-\x26\x2a\x2b\x2d\x5e\5f\60\x7b-\x7ea-zA-Z0-9]+)\?(?P<text>[\x21-\x3e\x40-\x7e]+)#';
     // @codingStandardsIgnoreEnd
 
