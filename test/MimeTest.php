@@ -28,7 +28,7 @@ class MimeTest extends TestCase
     /**
      * Setup environment
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->_originaltimezone = date_default_timezone_get();
     }
@@ -36,7 +36,7 @@ class MimeTest extends TestCase
     /**
      * Tear down environment
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         date_default_timezone_set($this->_originaltimezone);
     }
@@ -124,7 +124,7 @@ class MimeTest extends TestCase
     {
         $text   = "my body\r\n\r\n...after two newlines\r\n ";
         $result = quoted_printable_decode(Mime\Mime::encodeQuotedPrintable($text));
-        $this->assertContains("my body\r\n\r\n...after two newlines", $result, $result);
+        $this->assertStringContainsString("my body\r\n\r\n...after two newlines", $result, $result);
     }
 
     /**

@@ -27,7 +27,7 @@ class MessageTest extends TestCase
     {
         $msg = new Mime\Message();  // No Parts
         $p = $msg->getParts();
-        $this->assertInternalType('array', $p);
+        $this->assertIsArray($p);
         $this->assertEmpty($p);
 
         $p2 = [];
@@ -35,7 +35,7 @@ class MessageTest extends TestCase
         $p2[] = new Mime\Part('This is another test');
         $msg->setParts($p2);
         $p = $msg->getParts();
-        $this->assertInternalType('array', $p);
+        $this->assertIsArray($p);
         $this->assertCount(2, $p);
     }
 
@@ -71,8 +71,8 @@ class MessageTest extends TestCase
             $this->assertNotFalse($p2);
         }
         // check if the two test messages appear:
-        $this->assertContains('This is a test', $res);
-        $this->assertContains('This is another test', $res);
+        $this->assertStringContainsString('This is a test', $res);
+        $this->assertStringContainsString('This is another test', $res);
         // ... more in ZMailTest
     }
 
@@ -141,8 +141,8 @@ EOD;
 
         $part1 = $parts[0];
         $part1Content = $part1->getRawContent();
-        $this->assertContains('The original message', $part1Content);
-        $this->assertContains('End content', $part1Content);
+        $this->assertStringContainsString('The original message', $part1Content);
+        $this->assertStringContainsString('End content', $part1Content);
 
         $part2 = $parts[1];
         $this->assertEquals('image/gif', $part2->type);
