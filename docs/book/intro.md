@@ -25,18 +25,24 @@ also be consumed by applications requiring general MIME support.
 
 `Laminas\Mime\Mime` defines a set of constants commonly used with MIME messages:
 
+- `Laminas\Mime\Mime::TYPE_ENRICHED`: 'text/enriched'
+- `Laminas\Mime\Mime::TYPE_HTML`: 'text/html'
 - `Laminas\Mime\Mime::TYPE_OCTETSTREAM`: 'application/octet-stream'
 - `Laminas\Mime\Mime::TYPE_TEXT`: 'text/plain'
-- `Laminas\Mime\Mime::TYPE_HTML`: 'text/html'
+- `Laminas\Mime\Mime::TYPE_XML`: 'text/xml'
+- `Laminas\Mime\Mime::ENCODING_BASE64`: 'base64'
 - `Laminas\Mime\Mime::ENCODING_7BIT`: '7bit'
 - `Laminas\Mime\Mime::ENCODING_8BIT`: '8bit'
 - `Laminas\Mime\Mime::ENCODING_QUOTEDPRINTABLE`: 'quoted-printable'
-- `Laminas\Mime\Mime::ENCODING_BASE64`: 'base64'
 - `Laminas\Mime\Mime::DISPOSITION_ATTACHMENT`: 'attachment'
 - `Laminas\Mime\Mime::DISPOSITION_INLINE`: 'inline'
+- `Laminas\Mime\Mime::MESSAGE_DELIVERY_STATUS`: 'message/delivery-status'
 - `Laminas\Mime\Mime::MULTIPART_ALTERNATIVE`: 'multipart/alternative'
 - `Laminas\Mime\Mime::MULTIPART_MIXED`: 'multipart/mixed'
 - `Laminas\Mime\Mime::MULTIPART_RELATED`: 'multipart/related'
+- `Laminas\Mime\Mime::MULTIPART_RELATIVE`: 'multipart/relative'
+- `Laminas\Mime\Mime::MULTIPART_REPORT`: 'multipart/report'
+- `Laminas\Mime\Mime::MULTIPART_RFC822`: 'multipart/rfc822'
 
 ## Instantiating Laminas\\Mime
 
