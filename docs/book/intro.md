@@ -26,9 +26,11 @@ also be consumed by applications requiring general MIME support.
 `Laminas\Mime\Mime` defines a set of constants commonly used with MIME messages:
 
 - `Laminas\Mime\Mime::TYPE_ENRICHED`: 'text/enriched'
+- `Laminas\Mime\Mime::TYPE_APM`: 'text/x-amp-html'
 - `Laminas\Mime\Mime::TYPE_HTML`: 'text/html'
 - `Laminas\Mime\Mime::TYPE_OCTETSTREAM`: 'application/octet-stream'
 - `Laminas\Mime\Mime::TYPE_TEXT`: 'text/plain'
+- `Laminas\Mime\Mime::TYPE_WATCH`: 'text/watch-html'
 - `Laminas\Mime\Mime::TYPE_XML`: 'text/xml'
 - `Laminas\Mime\Mime::ENCODING_BASE64`: 'base64'
 - `Laminas\Mime\Mime::ENCODING_7BIT`: '7bit'

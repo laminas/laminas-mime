@@ -15,9 +15,11 @@ class Mime
 {
     // @codingStandardsIgnoreStart
     const TYPE_OCTETSTREAM         = 'application/octet-stream';
+    const TYPE_APM                 = 'text/x-amp-html';
     const TYPE_TEXT                = 'text/plain';
     const TYPE_HTML                = 'text/html';
     const TYPE_ENRICHED            = 'text/enriched';
+    const TYPE_WATCH               = 'text/watch-html';
     const TYPE_XML                 = 'text/xml';
     const ENCODING_7BIT            = '7bit';
     const ENCODING_8BIT            = '8bit';
