@@ -1,16 +1,15 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-mime for the canonical source repository
- * @copyright https://github.com/laminas/laminas-mime/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-mime/blob/master/LICENSE.md New BSD License
- */
-
 namespace LaminasTest\Mime;
 
 use Laminas\Mime;
 use Laminas\Mime\Message;
 use PHPUnit\Framework\TestCase;
+
+use function count;
+use function current;
+use function strlen;
+use function strpos;
 
 /**
  * @group      Laminas_Mime
@@ -26,11 +25,11 @@ class MessageTest extends TestCase
     public function testSetGetParts()
     {
         $msg = new Mime\Message();  // No Parts
-        $p = $msg->getParts();
+        $p   = $msg->getParts();
         $this->assertIsArray($p);
         $this->assertEmpty($p);
 
-        $p2 = [];
+        $p2   = [];
         $p2[] = new Mime\Part('This is a test');
         $p2[] = new Mime\Part('This is another test');
         $msg->setParts($p2);
@@ -42,28 +41,28 @@ class MessageTest extends TestCase
     public function testGetMime()
     {
         $msg = new Mime\Message();  // No Parts
-        $m = $msg->getMime();
-        $this->assertInstanceOf('Laminas\\Mime\\Mime', $m);
+        $m   = $msg->getMime();
+        $this->assertInstanceOf(\Laminas\Mime\Mime::class, $m);
 
-        $msg = new Mime\Message();  // No Parts
+        $msg  = new Mime\Message();  // No Parts
         $mime = new Mime\Mime('1234');
         $msg->setMime($mime);
         $m2 = $msg->getMime();
-        $this->assertInstanceOf('Laminas\\Mime\\Mime', $m2);
+        $this->assertInstanceOf(\Laminas\Mime\Mime::class, $m2);
         $this->assertEquals('1234', $m2->boundary());
     }
 
     public function testGenerate()
     {
         $msg = new Mime\Message();  // No Parts
-        $p1 = new Mime\Part('This is a test');
-        $p2 = new Mime\Part('This is another test');
+        $p1  = new Mime\Part('This is a test');
+        $p2  = new Mime\Part('This is another test');
         $msg->addPart($p1);
         $msg->addPart($p2);
-        $res = $msg->generateMessage();
-        $mime = $msg->getMime();
+        $res      = $msg->generateMessage();
+        $mime     = $msg->getMime();
         $boundary = $mime->boundary();
-        $p1 = strpos($res, $boundary);
+        $p1       = strpos($res, $boundary);
         // $boundary must appear once for every mime part
         $this->assertNotFalse($p1);
         if ($p1) {
@@ -78,7 +77,6 @@ class MessageTest extends TestCase
 
     /**
      * check if decoding a string into a \Laminas\Mime\Message object works
-     *
      */
     public function testDecodeMimeMessage()
     {
@@ -98,7 +96,7 @@ Content-ID: <12>
 This is another test
 --=_af4357ef34b786aae1491b0a2d14399f--
 EOD;
-        $res = Mime\Message::createFromMessage($text, '=_af4357ef34b786aae1491b0a2d14399f');
+        $res  = Mime\Message::createFromMessage($text, '=_af4357ef34b786aae1491b0a2d14399f');
 
         $parts = $res->getParts();
         $this->assertEquals(2, count($parts));
@@ -115,7 +113,6 @@ EOD;
 
     /**
      * check if decoding a string into a \Laminas\Mime\Message object works
-     *
      */
     public function testDecodeMimeMessageNoHeader()
     {
@@ -134,12 +131,12 @@ Content-Type: image/gif
 This is a test
 --=_af4357ef34b786aae1491b0a2d14399f--
 EOD;
-        $res = Mime\Message::createFromMessage($text, '=_af4357ef34b786aae1491b0a2d14399f');
+        $res  = Mime\Message::createFromMessage($text, '=_af4357ef34b786aae1491b0a2d14399f');
 
         $parts = $res->getParts();
         $this->assertEquals(2, count($parts));
 
-        $part1 = $parts[0];
+        $part1        = $parts[0];
         $part1Content = $part1->getRawContent();
         $this->assertStringContainsString('The original message', $part1Content);
         $this->assertStringContainsString('End content', $part1Content);
@@ -158,12 +155,12 @@ Content-Type: image/gif
 
 This is a test
 EOD;
-        $res = Mime\Message::createFromMessage($text);
+        $res  = Mime\Message::createFromMessage($text);
 
         $parts = $res->getParts();
         $this->assertEquals(1, count($parts));
 
-        $part1 = $parts[0];
+        $part1        = $parts[0];
         $part1Content = $part1->getRawContent();
         $this->assertEquals('This is a test', $part1Content);
         $this->assertEquals('image/gif', $part1->type);
@@ -206,7 +203,7 @@ EOD;
     {
         // This is a fixture as provided by many mailservers
         // e.g. cyrus or dovecot
-        $eol = "\r\n";
+        $eol     = "\r\n";
         $fixture = 'This is a MIME-encapsulated message' . $eol . $eol
             . '--=_af4357ef34b786aae1491b0a2d14399f' . $eol
             . 'Content-Type: text/plain' . $eol
@@ -217,7 +214,7 @@ EOD;
             . '--=_af4357ef34b786aae1491b0a2d14399f--';
 
         $message = Message::createFromMessage($fixture, '=_af4357ef34b786aae1491b0a2d14399f', $eol);
-        $parts = $message->getParts();
+        $parts   = $message->getParts();
 
         $this->assertEquals(1, count($parts));
         $this->assertEquals('attachment; filename="test.txt"', $parts[0]->getDisposition());
