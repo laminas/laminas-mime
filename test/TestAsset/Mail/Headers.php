@@ -1,4 +1,4 @@
-<?php // phpcs:disable WebimpressCodingStandard.NamingConventions.ValidVariableName.NotCamelCaps
+<?php // phpcs:disable WebimpressCodingStandard.NamingConventions.ValidVariableName.NotCamelCaps,SlevomatCodingStandard.Namespaces.UnusedUses.UnusedUse
 
 declare(strict_types=1);
 
@@ -10,6 +10,7 @@ use Iterator;
 use Laminas\Loader\PluginClassLocator;
 use Laminas\Mail\Header\GenericHeader;
 use Laminas\Mail\Header\HeaderInterface;
+use ReturnTypeWillChange;
 use Traversable;
 
 use function array_keys;

@@ -36,9 +36,11 @@
         }
     },
     "autoload-dev": {
+        "files": [
+            "test/TestAsset/Mail/Headers.php"
+        ],
         "psr-4": {
-            "LaminasTest\\Mime\\": "test/",
-            "Laminas\\Mail\\": "test/TestAsset/Mail/"
+            "LaminasTest\\Mime\\": "test/"
         }
     },
     "scripts": {
