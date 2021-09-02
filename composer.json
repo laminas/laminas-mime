@@ -37,7 +37,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "LaminasTest\\Mime\\": "test/"
+            "LaminasTest\\Mime\\": "test/",
+            "Laminas\\Mail\\": "test/TestAsset/Mail/"
         }
     },
     "scripts": {
