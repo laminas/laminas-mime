@@ -19,13 +19,12 @@
         "sort-packages": true
     },
     "require": {
-        "php": "^7.3 || ~8.0.0",
-        "laminas/laminas-stdlib": "^2.7 || ^3.0",
-        "laminas/laminas-zendframework-bridge": "^1.0"
+        "php": "^7.3 || ~8.0.0 || ~8.1.0",
+        "laminas/laminas-stdlib": "^2.7 || ^3.0"
     },
     "require-dev": {
-        "laminas/laminas-coding-standard": "~1.0.0",
-        "laminas/laminas-mail": "^2.6",
+        "laminas/laminas-coding-standard": "~2.2.1",
+        "laminas/laminas-mail": "^2.12",
         "phpunit/phpunit": "^9.3"
     },
     "suggest": {
@@ -37,6 +36,9 @@
         }
     },
     "autoload-dev": {
+        "files": [
+            "test/TestAsset/Mail/Headers.php"
+        ],
         "psr-4": {
             "LaminasTest\\Mime\\": "test/"
         }
@@ -51,7 +53,7 @@
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     },
-    "replace": {
-        "zendframework/zend-mime": "^2.7.2"
+    "conflict": {
+        "zendframework/zend-mime": "*"
     }
 }
