@@ -185,7 +185,7 @@ class Decode
      */
     public static function splitHeaderField($field, $wantedPart = null, $firstName = '0')
     {
-        $wantedPart = strtolower($wantedPart);
+        $wantedPart = strtolower($wantedPart ?? '');
         $firstName  = strtolower($firstName);
 
         // special case - a bit optimized
