@@ -10,6 +10,7 @@ use function array_keys;
 use function base64_decode;
 use function count;
 use function current;
+use function in_array;
 use function quoted_printable_decode;
 use function sprintf;
 use function strlen;
