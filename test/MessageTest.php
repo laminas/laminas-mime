@@ -189,7 +189,7 @@ EOD;
         $this->assertEquals('', $mimeMessage->generateMessage());
     }
 
-    public function testDuplicatePartAddedWillThrowException()
+    public function testPartAddedMoreThanOnceWillThrowException()
     {
         $this->expectException(Mime\Exception\InvalidArgumentException::class);
 
@@ -197,6 +197,17 @@ EOD;
         $part    = new Mime\Part('This is a test');
         $message->addPart($part);
         $message->addPart($part);
+    }
+
+    public function testDuplicatePartAddedWillThrowException()
+    {
+        $this->expectException(Mime\Exception\InvalidArgumentException::class);
+
+        $message = new Mime\Message();
+        $part1    = new Mime\Part('This is a test');
+        $part2    = new Mime\Part('This is a test');
+        $message->addPart($part1);
+        $message->addPart($part2);
     }
 
     public function testFromStringWithCrlfAndRfc2822FoldedHeaders()
