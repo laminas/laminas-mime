@@ -204,8 +204,8 @@ EOD;
         $this->expectException(Mime\Exception\InvalidArgumentException::class);
 
         $message = new Mime\Message();
-        $part1    = new Mime\Part('This is a test');
-        $part2    = new Mime\Part('This is a test');
+        $part1   = new Mime\Part('This is a test');
+        $part2   = new Mime\Part('This is a test');
         $message->addPart($part1);
         $message->addPart($part2);
     }
