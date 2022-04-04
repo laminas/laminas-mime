@@ -205,4 +205,20 @@ class PartTest extends TestCase
         $this->expectException(Mime\Exception\InvalidArgumentException::class);
         $part->setContent($content);
     }
+
+    public function testBinaryPart()
+    {
+        $content      = file_get_contents(__DIR__ . '/TestAsset/laminas.png');
+        $inputMessage = new Mime\Message();
+        $inputMessage->addPart(new Mime\Part('Hello World'));
+        $inputMessage->addPart(new Mime\Part($content));
+
+        $outputMessage = Mime\Message::createFromMessage(
+            $inputMessage->generateMessage(),
+            $inputMessage->getMime()->boundary()
+        );
+        $parts         = $outputMessage->getParts();
+        $this->assertCount(2, $parts);
+        $this->assertEquals($content, $parts[1]->getContent());
+    }
 }
