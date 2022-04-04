@@ -42,16 +42,17 @@ class Decode
         // find every mime part limiter and cut out the
         // string before it.
         // the part before the first boundary string is discarded:
-        if (preg_match('/--' . $boundary . '\r?\n/', $body, $matches, PREG_OFFSET_CAPTURE) === 0) {
+        if (preg_match('/--' . $boundary . '(\r?\n)/', $body, $matches, PREG_OFFSET_CAPTURE) === 0) {
             // no parts found!
             return [];
         }
 
         // position after first boundary line
-        $start = $matches[0][1] + strlen($matches[0][0]);
+        $start     = $matches[0][1] + strlen($matches[0][0]);
+        $serverEOL = $matches[1][0];
 
         while (preg_match('/--' . $boundary . '\r?\n/', $body, $matches, PREG_OFFSET_CAPTURE, $start) === 1) {
-            $res[] = substr($body, $start, $matches[0][1] - $start - 1);
+            $res[] = substr($body, $start, $matches[0][1] - $start - strlen($serverEOL));
             $start = $matches[0][1] + strlen($matches[0][0]);
         }
 
@@ -61,7 +62,7 @@ class Decode
         }
 
         // the remaining part also needs to be parsed:
-        $res[] = substr($body, $start, $matches[0][1] - $start - 1);
+        $res[] = substr($body, $start, $matches[0][1] - $start - strlen($serverEOL));
         return $res;
     }
 
