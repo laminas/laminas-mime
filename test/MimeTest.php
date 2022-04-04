@@ -246,7 +246,7 @@ class MimeTest extends TestCase
                 'Alle meine Entchen schwimmen in dem See, schwimmen in dem See, K=C3=B6pfche=
 n in das Wasser, Schw=C3=A4nzchen in die H=C3=B6h!',
             ],
-            ['foobar', 'base64', 'Zm9vYmFyCg=='],
+            ['foobar', 'base64', 'Zm9vYmFy'],
         ];
         // phpcs:enable
     }
@@ -257,15 +257,15 @@ n in das Wasser, Schw=C3=A4nzchen in die H=C3=B6h!',
     public function testFromMessageDecode(string $input, string $encoding, string $result): void
     {
         $parts = Mime\Message::createFromMessage(
-            '--089e0141a1902f83ee04e0a07b7a' . "\r\n"
-            . 'Content-Type: text/plain; charset=UTF-8' . "\r\n"
-            . 'Content-Transfer-Encoding: ' . $encoding . "\r\n"
-            . "\r\n"
-            . $result . "\r\n"
+            '--089e0141a1902f83ee04e0a07b7a' . "\n"
+            . 'Content-Type: text/plain; charset=UTF-8' . "\n"
+            . 'Content-Transfer-Encoding: ' . $encoding . "\n"
+            . "\n"
+            . $result . "\n"
             . '--089e0141a1902f83ee04e0a07b7a--',
             '089e0141a1902f83ee04e0a07b7a'
         )->getParts();
-        $this->assertSame($input . "\n", $parts[0]->getRawContent());
+        $this->assertSame($input, $parts[0]->getRawContent());
     }
 
     /**
