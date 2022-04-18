@@ -24,6 +24,7 @@
 > If you are looking for an actively maintained package alternative, we recommend:
 >
 > - [symfony/mime](https://symfony.com/doc/current/components/mime.html)
+> - [zbateson/mail-mime-parser](https://github.com/zbateson/mail-mime-parser)
 
 [![Build Status](https://github.com/laminas/laminas-mime/workflows/Continuous%20Integration/badge.svg)](https://github.com/laminas/laminas-mime/actions?query=workflow%3A"Continuous+Integration")
 
