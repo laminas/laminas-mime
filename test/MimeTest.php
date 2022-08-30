@@ -153,6 +153,53 @@ class MimeTest extends TestCase
     }
 
     /**
+     * @dataProvider dataTestEncodeMailHeaderQuotedPrintableWithHeaderName
+     */
+    public function testEncodeMailHeaderQuotedPrintableWithHeaderName(
+        string $str,
+        string $charset,
+        string $expectedResult,
+        int $headerLength
+    ): void {
+        $actualResult = Mime\Mime::encodeQuotedPrintableHeader($str, $charset, 78, Mime\Mime::LINEEND, $headerLength);
+        $this->assertEquals($expectedResult, $actualResult);
+    }
+
+    /** @psalm-return array<array-key, array{0: string, 1: string, 2: string, 3: int}> */
+    public static function dataTestEncodeMailHeaderQuotedPrintableWithHeaderName(): array
+    {
+        return [
+            'long string with header name size'     => [
+                "xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx",
+                "UTF-8",
+                "=?UTF-8?Q?xxxxx=20xxxxx=20xxxxx=20xxxxx=20xxxxx=20xxxxx=20xxxxx=20?=" . Mime\Mime::LINEEND
+                . " =?UTF-8?Q?xxxxx=20xxxxx=20xxxxx=20xxxxx=20xxxxx=20xxxxx?=",
+                9,
+            ],
+            'long string without header name size'  => [
+                "xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx",
+                "UTF-8",
+                "=?UTF-8?Q?xxxxx=20xxxxx=20xxxxx=20xxxxx=20xxxxx=20xxxxx=20xxxxx=20xxxxx=20?=" . Mime\Mime::LINEEND
+                . " =?UTF-8?Q?xxxxx=20xxxxx=20xxxxx=20xxxxx=20xxxxx?=",
+                0,
+            ],
+            'short string with header name size'    => [
+                "xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx",
+                "UTF-8",
+                "=?UTF-8?Q?xxxxx=20xxxxx=20xxxxx=20xxxxx=20xxxxx=20xxxxx=20?=" . Mime\Mime::LINEEND
+                . " =?UTF-8?Q?xxxxx=20xxxxx=20xxxxx?=",
+                11,
+            ],
+            'short string without header name size' => [
+                "xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx",
+                "UTF-8",
+                "=?UTF-8?Q?xxxxx=20xxxxx=20xxxxx=20xxxxx=20xxxxx=20xxxxx=20xxxxx?=",
+                11,
+            ],
+        ];
+    }
+
+    /**
      * @group        Laminas-1688
      * @dataProvider dataTestEncodeMailHeaderBase64
      */
@@ -170,9 +217,7 @@ class MimeTest extends TestCase
             [
                 "Alle meine Entchen schwimmen in dem See, schwimmen in dem See, Köpfchen in das Wasser, Schwänzchen in die Höh!",
                 "UTF-8",
-                "=?UTF-8?B?QWxsZSBtZWluZSBFbnRjaGVuIHNjaHdpbW1lbiBpbiBkZW0gU2VlLCBzY2h3?=
- =?UTF-8?B?aW1tZW4gaW4gZGVtIFNlZSwgS8O2cGZjaGVuIGluIGRhcyBXYXNzZXIsIFNj?=
- =?UTF-8?B?aHfDpG56Y2hlbiBpbiBkaWUgSMO2aCE=?=",
+                "=?UTF-8?B?QWxsZSBtZWluZSBFbnRjaGVuIHNjaHdpbW1lbiBpbiBkZW0gU2VlLCBzY2h3?=\n =?UTF-8?B?aW1tZW4gaW4gZGVtIFNlZSwgS8O2cGZjaGVuIGluIGRhcyBXYXNzZXIsIFNj?=\n =?UTF-8?B?aHfDpG56Y2hlbiBpbiBkaWUgSMO2aCE=?=",
             ],
         ];
         // phpcs:enable
