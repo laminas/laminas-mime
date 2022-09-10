@@ -199,17 +199,26 @@ class Decode
             throw new Exception\RuntimeException('not a valid header field');
         }
 
+        $fullField = [];
         if ($wantedPart) {
             foreach ($matches[1] as $key => $name) {
-                if (strcasecmp($name, $wantedPart)) {
+
+                if (!preg_match('/' . preg_quote($wantedPart) . "(\*[0-9])*" . '/', $name)) { //support multiname
                     continue;
                 }
-                if ($matches[2][$key][0] !== '"') {
-                    return $matches[2][$key];
+
+                $val = $matches[2][$key][0] != '"' ? $matches[2][$key] : substr($matches[2][$key], 1, -1);
+
+                // if name and wantedPart doees not match fully(they have matched above in the regex),
+                // it means that we have multiple values
+                if (strcasecmp($name, $wantedPart) && gettype($val) === 'string') {
+                    $fullField[$wantedPart] .= $val;
+                } else {// name and wantedPart match
+                    return $val;
                 }
-                return substr($matches[2][$key], 1, -1);
+
             }
-            return;
+            return $fullField[$wantedPart] ?: null;
         }
 
         $split = [];
