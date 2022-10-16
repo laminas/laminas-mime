@@ -1,5 +1,6 @@
 <?php // phpcs:disable WebimpressCodingStandard.NamingConventions.ValidVariableName.NotCamelCaps,SlevomatCodingStandard.Namespaces.UnusedUses.UnusedUse
 
+
 declare(strict_types=1);
 
 namespace Laminas\Mail;
@@ -253,7 +254,7 @@ class Headers implements Countable, Iterator
         if (! is_array($headers) && ! $headers instanceof Traversable) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Expected array or Traversable; received "%s"',
-                is_object($headers) ? get_class($headers) : gettype($headers)
+                is_object($headers) ? $headers::class : gettype($headers)
             ));
         }
 
@@ -294,7 +295,7 @@ class Headers implements Countable, Iterator
                 '%s expects its first argument to be a string; received "%s"',
                 __METHOD__,
                 is_object($headerFieldNameOrLine)
-                ? get_class($headerFieldNameOrLine)
+                ? $headerFieldNameOrLine::class
                 : gettype($headerFieldNameOrLine)
             ));
         }
@@ -345,7 +346,7 @@ class Headers implements Countable, Iterator
                 '%s requires a string or %s instance; received %s',
                 __METHOD__,
                 HeaderInterface::class,
-                is_object($instanceOrFieldName) ? get_class($instanceOrFieldName) : gettype($instanceOrFieldName)
+                is_object($instanceOrFieldName) ? $instanceOrFieldName::class : gettype($instanceOrFieldName)
             ));
         }
 
