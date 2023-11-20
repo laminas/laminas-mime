@@ -2,7 +2,9 @@
 
 namespace Laminas\Mime;
 
+use Laminas\Mail\Header\ContentType;
 use Laminas\Mail\Header\HeaderInterface;
+use Laminas\Mail\Headers;
 use Laminas\Mime\Mime;
 use Laminas\Mime\Part;
 
@@ -20,6 +22,8 @@ use function trim;
 
 class Message
 {
+    const CONTENT_TYPE_MULTIPART_ALTERNATIVE = "multipart/alternative";
+
     /** @var Part[] */
     protected $parts = [];
 
@@ -309,10 +313,33 @@ class Message
                 }
             }
 
-            $newPart = new Part($body);
-            foreach ($properties as $key => $value) {
-                $newPart->$key = $value;
+            /** @var Headers $headers */
+            $headers = $part['header'];
+
+            /**
+             * If the current message part's body has a content-type of "multipart/alternative",
+             * then create and add a new Part to the current message which has a Part for each
+             * sub/alternative Part in the message.
+             */
+            if (
+                $headers->has('content-type')
+                && $headers->get('content-type')->getType() === self::CONTENT_TYPE_MULTIPART_ALTERNATIVE
+            ) {
+                /** @var ContentType $contentTypeHeader */
+                $contentTypeHeader = $headers->get('content-type');
+                
+                $message = self::createFromMessage($body, $contentTypeHeader->getParameter('boundary'), $EOL);
+                $newPart = new Part();
+                foreach ($message->getParts() as $alternativePart) {
+                    $newPart->addPart($alternativePart);
+                }
+            } else {
+                $newPart = new Part($body);
+                foreach ($properties as $key => $value) {
+                    $newPart->$key = $value;
+                }
             }
+
             $res->addPart($newPart);
         }
 
