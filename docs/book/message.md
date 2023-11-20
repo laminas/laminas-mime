@@ -3,7 +3,7 @@
 `Laminas\Mime\Message` represents a MIME compliant message that can contain one or
 more separate Parts (represented as [Laminas\Mime\Part](part.md) instances).
 Encoding and boundary handling are handled transparently by the class.
-`Message` instances can also be generated from MIME strings.
+`Message` instances can also be generated from MIME-compliant strings.
 
 ## Instantiation
 
@@ -16,7 +16,7 @@ calling `->addPart($part)`
 
 An array with all [Part](part.md) instances in the `Message` is returned from
 the method `getParts()`. The `Part` instances can then be modified on
-retrieveal, as they are stored in the array as references. If parts are added
+retrieval, as they are stored in the array as references. If parts are added
 to the array or the sequence is changed, the array needs to be passed back to
 the `Message` instance by calling `setParts($partsArray)`.
 
@@ -46,7 +46,7 @@ strings and returning a `Laminas\Mime\Message` instance:
 $message = Laminas\Mime\Message::createFromMessage($string, $boundary);
 ```
 
-As of version 2.6.1, You may also parse a single-part message by omitting the
+As of version 2.6.1, you may also parse a single-part message by omitting the
 `$boundary` argument:
 
 ```php

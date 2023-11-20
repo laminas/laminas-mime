@@ -327,7 +327,7 @@ class Message
             ) {
                 /** @var ContentType $contentTypeHeader */
                 $contentTypeHeader = $headers->get('content-type');
-                
+
                 $message = self::createFromMessage($body, $contentTypeHeader->getParameter('boundary'), $EOL);
                 $newPart = new Part();
                 foreach ($message->getParts() as $alternativePart) {
