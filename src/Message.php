@@ -33,7 +33,7 @@ class Message
      *
      * @return Part[]
      */
-    public function getParts()
+    public function getParts(): array
     {
         return $this->parts;
     }

@@ -72,7 +72,7 @@ class Part
      * at this point, is to only store Part objects built from parsing
      * Messages with a content-type of "multipart/alternative".
      *
-     * @var array<array-key, Part>
+     * @var Part[]
      */
     protected array $parts = [];
 
