@@ -245,11 +245,7 @@ This is a test email with 1 attachment.
 Content-Type: text/html; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr">This is a test email with 1 attachment.<br clear=3D"all"><=
-div><br></div>-- <br><div class=3D"gmail_signature" data-smartmail=3D"gmail=
-_signature"><div dir=3D"ltr"><img src=3D"https://sendgrid.com/brand/sg-logo=
--email.png" width=3D"96" height=3D"17"><br><div><br></div></div></div>
-</div>
+<div>This is a test email with 1 attachment.</div>
 
 --001a11447dc881e40b0537fe6d58--
 
@@ -380,10 +376,7 @@ EOL;
         $this->assertTrue($headers->has('Content-Transfer-Encoding'));
         $this->assertSame("quoted-printable", $headers->get('Content-Transfer-Encoding')->getFieldValue());
 
-        $htmlBody = <<<EOF
-<div dir="ltr">This is a test email with 1 attachment.<br clear="all"><div><br></div>-- <br><div class="gmail_signature" data-smartmail="gmail_signature"><div dir="ltr"><img src="https://sendgrid.com/brand/sg-logo-email.png" width="96" height="17"><br><div><br></div></div></div>
-</div>
-EOF;
+        $htmlBody = "<div>This is a test email with 1 attachment.</div>";
         $this->assertSame($htmlBody, trim($htmlPart->getRawContent()));
 
         $this->assertInstanceOf(Part::class, $parts[1]);
