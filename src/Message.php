@@ -22,8 +22,6 @@ use function trim;
 
 class Message
 {
-    const CONTENT_TYPE_MULTIPART_ALTERNATIVE = "multipart/alternative";
-
     /** @var Part[] */
     protected $parts = [];
 
@@ -323,7 +321,7 @@ class Message
              */
             if (
                 $headers->has('content-type')
-                && $headers->get('content-type')->getType() === self::CONTENT_TYPE_MULTIPART_ALTERNATIVE
+                && $headers->get('content-type')->getType() === \Laminas\Mime\Mime::MULTIPART_ALTERNATIVE
             ) {
                 /** @var ContentType $contentTypeHeader */
                 $contentTypeHeader = $headers->get('content-type');
