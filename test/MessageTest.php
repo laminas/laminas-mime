@@ -6,15 +6,20 @@ namespace LaminasTest\Mime;
 
 use Laminas\Mail\Headers;
 use Laminas\Mime;
-use Laminas\Mime\AlternativePart;
 use Laminas\Mime\Message;
 use Laminas\Mime\Part;
 use PHPUnit\Framework\TestCase;
 
+use function array_filter;
 use function count;
 use function current;
+use function str_replace;
+use function str_starts_with;
 use function strlen;
 use function strpos;
+use function trim;
+
+use const ARRAY_FILTER_USE_BOTH;
 
 /**
  * @group      Laminas_Mime
@@ -353,10 +358,10 @@ AFtDb250ZW50X1R5cGVzXS54bWxQSwUGAAAAAAgACAD/AQAAmw4AAAAA
 
 --001a11447dc881e40f0537fe6d5a--
 EOL;
-        $boundary = '001a11447dc881e40f0537fe6d5a';
+        $boundary   = '001a11447dc881e40f0537fe6d5a';
 
         $message = Message::createFromMessage($rawMessage, $boundary);
-        $parts = $message->getParts();
+        $parts   = $message->getParts();
 
         $this->assertCount(2, $parts);
 

@@ -141,13 +141,13 @@ class Message
 
             $boundaryLine = $mime->boundaryLine($EOL);
             $body         = 'This is a message in Mime Format.  If you see this, '
-                  . "your mail reader does not support this format." . $EOL;
+                . "your mail reader does not support this format." . $EOL;
 
             foreach (array_keys($this->parts) as $p) {
                 $body .= $boundaryLine
-                       . $this->getPartHeaders($p, $EOL)
-                       . $EOL
-                       . $this->getPartContent($p, $EOL);
+                    . $this->getPartHeaders($p, $EOL)
+                    . $EOL
+                    . $this->getPartContent($p, $EOL);
             }
 
             $body .= $mime->mimeEnd($EOL);
@@ -321,7 +321,7 @@ class Message
              */
             if (
                 $headers->has('content-type')
-                && $headers->get('content-type')->getType() === \Laminas\Mime\Mime::MULTIPART_ALTERNATIVE
+                && $headers->get('content-type')->getType() === Mime::MULTIPART_ALTERNATIVE
             ) {
                 /** @var ContentType $contentTypeHeader */
                 $contentTypeHeader = $headers->get('content-type');
@@ -333,9 +333,9 @@ class Message
                 }
             } else {
                 $newPart = new Part($body);
-                foreach ($properties as $key => $value) {
-                    $newPart->$key = $value;
-                }
+            }
+            foreach ($properties as $key => $value) {
+                $newPart->$key = $value;
             }
 
             $res->addPart($newPart);
