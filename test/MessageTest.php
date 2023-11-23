@@ -401,5 +401,31 @@ EOF;
             "application/vnd.openxmlformats-officedocument.wordprocessingml.document;\r\n name=\"DockMcWordface.docx\"",
             $headers->get('Content-Type')->getFieldValue()
         );
+
+        $attachments = array_filter($parts, function ($part, $index) {
+            return str_starts_with(
+                (string) $part->getDisposition(),
+                "attachment"
+            );
+        }, ARRAY_FILTER_USE_BOTH);
+        $this->assertCount(1, $attachments);
+
+        $nonAttachments = array_filter($parts, function ($part, $index) {
+            return ! str_starts_with(
+                (string) $part->getDisposition(),
+                "attachment"
+            );
+        }, ARRAY_FILTER_USE_BOTH);
+        $this->assertCount(1, $nonAttachments);
+        $this->assertCount(2, $nonAttachments[0]->getParts());
+
+        /** @var Part[] $noteParts */
+        $noteParts = array_filter($nonAttachments[0]->getParts(), function ($part, $index) {
+            return str_starts_with(
+                (string) $part->getType(),
+                "text/plain"
+            );
+        }, ARRAY_FILTER_USE_BOTH);
+        $this->assertSame("This is a test email with 1 attachment.", trim($noteParts[0]->getContent()));
     }
 }
