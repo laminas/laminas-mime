@@ -68,7 +68,7 @@ class Part
      * Stores a list of sub parts of this part
      *
      * It supports RFC 1341 7.2.3: "The Multipart/alternative subtype".
-     * While it can a list of parts without limitation, the intention,
+     * While it can store a list of parts without limitation, the intention,
      * at this point, is to only store Part objects built from parsing
      * Messages with a content-type of "multipart/alternative".
      *
