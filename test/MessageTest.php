@@ -402,6 +402,8 @@ EOL;
             );
         }, ARRAY_FILTER_USE_BOTH);
         $this->assertCount(1, $attachments);
+        $docAttachment = $attachments[1];
+        $this->assertSame("DockMcWordface.docx", $docAttachment->getFileName());
 
         $nonAttachments = array_filter($parts, function ($part, $index) {
             return ! str_starts_with(
