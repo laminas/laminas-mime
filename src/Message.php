@@ -2,18 +2,17 @@
 
 namespace Laminas\Mime;
 
+use Laminas\Mail\Header\ContentDisposition;
 use Laminas\Mail\Header\ContentType;
 use Laminas\Mail\Header\HeaderInterface;
 use Laminas\Mail\Headers;
-use Laminas\Mime\Mime;
-use Laminas\Mime\Part;
-
 use function array_keys;
 use function base64_decode;
 use function count;
 use function current;
 use function quoted_printable_decode;
 use function sprintf;
+use function str_starts_with;
 use function strlen;
 use function strpos;
 use function strtolower;
@@ -333,6 +332,17 @@ class Message
                 }
             } else {
                 $newPart = new Part($body);
+
+                if ($headers->has('content-disposition')) {
+                    /** @var ContentDisposition $header */
+                    $header = $headers->get('content-disposition');
+                    if (
+                        str_starts_with($header->getFieldValue(), 'attachment')
+                        && $header->getParameter('filename') !== null
+                    ) {
+                        $newPart->setFileName($header->getParameter('filename'));
+                    }
+                }
             }
             foreach ($properties as $key => $value) {
                 $newPart->$key = $value;
