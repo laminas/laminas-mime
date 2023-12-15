@@ -2,10 +2,10 @@
 
 namespace Laminas\Mime;
 
+use Laminas\Mail\Header\ContentDisposition;
+use Laminas\Mail\Header\ContentType;
 use Laminas\Mail\Header\HeaderInterface;
-use Laminas\Mime\Mime;
-use Laminas\Mime\Part;
-
+use Laminas\Mail\Headers;
 use function array_keys;
 use function base64_decode;
 use function count;
@@ -31,7 +31,7 @@ class Message
      *
      * @return Part[]
      */
-    public function getParts()
+    public function getParts(): array
     {
         return $this->parts;
     }
@@ -139,13 +139,13 @@ class Message
 
             $boundaryLine = $mime->boundaryLine($EOL);
             $body         = 'This is a message in Mime Format.  If you see this, '
-                  . "your mail reader does not support this format." . $EOL;
+                . "your mail reader does not support this format." . $EOL;
 
             foreach (array_keys($this->parts) as $p) {
                 $body .= $boundaryLine
-                       . $this->getPartHeaders($p, $EOL)
-                       . $EOL
-                       . $this->getPartContent($p, $EOL);
+                    . $this->getPartHeaders($p, $EOL)
+                    . $EOL
+                    . $this->getPartContent($p, $EOL);
             }
 
             $body .= $mime->mimeEnd($EOL);
@@ -309,10 +309,41 @@ class Message
                 }
             }
 
-            $newPart = new Part($body);
+            /** @var Headers $headers */
+            $headers = $part['header'];
+
+            /**
+             * If the current message part's body has a content-type of "multipart/alternative",
+             * then create and add a new Part to the current message which has a Part for each
+             * sub/alternative Part in the message.
+             */
+            if (
+                $headers->has('content-type')
+                && $headers->get('content-type')->getType() === Mime::MULTIPART_ALTERNATIVE
+            ) {
+                /** @var ContentType $contentTypeHeader */
+                $contentTypeHeader = $headers->get('content-type');
+
+                $message = self::createFromMessage($body, $contentTypeHeader->getParameter('boundary'), $EOL);
+                $newPart = new Part();
+                foreach ($message->getParts() as $alternativePart) {
+                    $newPart->addPart($alternativePart);
+                }
+            } else {
+                $newPart = new Part($body);
+
+                if ($headers->has('content-disposition')) {
+                    /** @var ContentDisposition $header */
+                    $header = $headers->get('content-disposition');
+                    if ($header->getParameter('filename') !== null) {
+                        $newPart->setFileName($header->getParameter('filename'));
+                    }
+                }
+            }
             foreach ($properties as $key => $value) {
                 $newPart->$key = $value;
             }
+
             $res->addPart($newPart);
         }
 

@@ -65,6 +65,33 @@ class Part
     protected $filters = [];
 
     /**
+     * Stores a list of sub parts of this part
+     *
+     * It supports RFC 1341 7.2.3: "The Multipart/alternative subtype".
+     * While it can store a list of parts without limitation, the intention,
+     * at this point, is to only store Part objects built from parsing
+     * Messages with a content-type of "multipart/alternative".
+     *
+     * @var Part[]
+     */
+    protected array $parts = [];
+
+    /**
+     * Retrieve the sub-Parts of this Part
+     *
+     * @return Part[]
+     */
+    public function getParts(): array
+    {
+        return $this->parts;
+    }
+
+    public function addPart(Part $part): void
+    {
+        $this->parts[] = $part;
+    }
+
+    /**
      * create a new Mime Part.
      * The (unencoded) content of the Part as passed
      * as a string or stream
